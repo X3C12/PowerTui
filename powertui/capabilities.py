@@ -16,7 +16,7 @@ import subprocess
 from dataclasses import dataclass, field
 from typing import Callable, Dict, List, Optional
 
-from platform_detect import DistroInfo, detect_distro
+from .platform_detect import DistroInfo, detect_distro
 
 # Backend preference order (first available tool wins), shared to avoid repeating
 # identical lists per family.

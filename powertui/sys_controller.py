@@ -3,7 +3,7 @@ import subprocess
 from dataclasses import dataclass, field
 from typing import List, Dict, Optional, Tuple
 
-from capabilities import Capabilities
+from .capabilities import Capabilities
 
 
 @dataclass
@@ -324,7 +324,7 @@ class SystemController:
         cap = self.caps.get("epp")
         if cap.supported:
             logical = "power" if enable else "balance_performance"
-            from capabilities import map_epp
+            from .capabilities import map_epp
             epp_mode = map_epp(logical, list(cap.meta.get("allowed", [])))
             if epp_mode is None:
                 actions.append("EPP skipped (unrecognised value)")

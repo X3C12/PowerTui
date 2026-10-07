@@ -2,7 +2,7 @@ import os
 import shutil
 import tempfile
 import unittest
-from sys_controller import SystemController
+from powertui.sys_controller import SystemController
 
 class TestSystemControllerTopology(unittest.TestCase):
     def setUp(self):

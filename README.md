@@ -4,6 +4,10 @@ A cross-distribution terminal UI for live CPU core, Turbo/EPP, GPU, platform-pro
 
 PowerTUI detects the host distribution and probes each hardware subsystem before acting. It performs the correct backend-specific action where one exists, and grey-out + reports the reason (with a package-manager install hint) where it does not.
 
+<!-- Demo GIF slot: record one, add docs/demo.gif, then uncomment the line below and delete this comment.
+![PowerTUI demo](docs/demo.gif)
+-->
+
 ![PowerTUI dashboard](docs/screenshot.png)
 
 ## Install
@@ -21,6 +25,18 @@ wget -qO- https://raw.githubusercontent.com/X3C12/PowerTui/main/get.sh | sh
 ```
 
 `get.sh` downloads the source into `$HOME/.local/share/powertui` (override with `--dir <path>`), installs the `powertui` command and desktop entry, and can fetch a specific branch or tag with `--ref <ref>` (default `main`). Add `--system` for a system-wide install and `--verify` to verify the download before installing.
+
+### Install with pip / pipx
+
+PowerTUI is a standard Python package:
+
+```bash
+pipx install git+https://github.com/X3C12/PowerTui.git   # from a git checkout
+pip install .                                            # or into a virtualenv
+# pipx install powertui                                  # once it is on PyPI
+```
+
+This provides the `powertui` command (`powertui --diagnostics` for the report). It does not create a desktop entry — use `install.sh` for that.
 
 ### Install from a local clone
 
@@ -137,7 +153,7 @@ From a local clone without installing, the launcher can be run directly:
 powertui --diagnostics
 # or from a local clone
 ./run_tui.sh --diagnostics
-python3 app.py --diagnostics
+python3 -m powertui --diagnostics
 ```
 
 Example diagnostics output:
@@ -207,10 +223,10 @@ Buttons whose capability is unavailable are disabled automatically.
 
 PowerTUI flows detection -> capability -> dispatch -> TUI:
 
-1. **Detection** — `platform_detect.py` parses `/etc/os-release` (fallbacks `/usr/lib/os-release`, `/etc/lsb-release`) into a `DistroInfo` (id, name, version, `id_like`, family, package manager, init system, privilege tool). `classify_family` maps the distro id/`ID_LIKE` into a family case-insensitively.
-2. **Capability** — `capabilities.py` probes 12 subsystem keys once and returns a `Capability(supported, backend, reason, hint, meta)` for each: `cpu_online`, `turbo`, `epp`, `power_profile`, `gpu_switch`, `nvidia_power`, `amd_gpu`, `amd_power`, `asus_platform`, `fan_control`, `battery`, `cleanup`. Hardware presence comes from PCI vendor IDs (NVIDIA `0x10de`, AMD `0x1002`) and `/proc/cpuinfo` (`AuthenticAMD`). `DISTRO_RULES` holds per-family preference orders built from shared constants.
-3. **Dispatch** — `sys_controller.py` (`SystemController`, `CPUCore`) reads and writes sysfs and shells out to whichever backend was detected. All privileged writes funnel through `_write_file_or_sudo`, which skips no-op writes and escalates via `sudo -n`/`doas`/`pkexec` under a 3-second timeout.
-4. **TUI** — `app.py` (Textual) renders the dashboard and maps buttons to capabilities via `BUTTON_CAPABILITY`; unsupported buttons are disabled. A 1-second timer refreshes the core dashboard and extended telemetry refreshes roughly every 5 seconds.
+1. **Detection** — `powertui/platform_detect.py` parses `/etc/os-release` (fallbacks `/usr/lib/os-release`, `/etc/lsb-release`) into a `DistroInfo` (id, name, version, `id_like`, family, package manager, init system, privilege tool). `classify_family` maps the distro id/`ID_LIKE` into a family case-insensitively.
+2. **Capability** — `powertui/capabilities.py` probes 12 subsystem keys once and returns a `Capability(supported, backend, reason, hint, meta)` for each: `cpu_online`, `turbo`, `epp`, `power_profile`, `gpu_switch`, `nvidia_power`, `amd_gpu`, `amd_power`, `asus_platform`, `fan_control`, `battery`, `cleanup`. Hardware presence comes from PCI vendor IDs (NVIDIA `0x10de`, AMD `0x1002`) and `/proc/cpuinfo` (`AuthenticAMD`). `DISTRO_RULES` holds per-family preference orders built from shared constants.
+3. **Dispatch** — `powertui/sys_controller.py` (`SystemController`, `CPUCore`) reads and writes sysfs and shells out to whichever backend was detected. All privileged writes funnel through `_write_file_or_sudo`, which skips no-op writes and escalates via `sudo -n`/`doas`/`pkexec` under a 3-second timeout.
+4. **TUI** — `powertui/app.py` (Textual) renders the dashboard and maps buttons to capabilities via `BUTTON_CAPABILITY`; unsupported buttons are disabled. A 1-second timer refreshes the core dashboard and extended telemetry refreshes roughly every 5 seconds. `powertui/cli.py` is the `powertui` entry point (and handles `--diagnostics` before importing Textual).
 
 ## Testing
 
@@ -240,10 +256,10 @@ python3 -m unittest discover -p "test_*.py"
 
 To add a device or backend:
 
-1. Add a probe in `capabilities.py` (return a `Capability`; include a reason and, when applicable, an install hint) and register it in `_probe_all`.
+1. Add a probe in `powertui/capabilities.py` (return a `Capability`; include a reason and, when applicable, an install hint) and register it in `_probe_all`.
 2. If the tool availability depends on the distribution, add or adjust a `DISTRO_RULES` entry using the shared order constants.
-3. Add a dispatch branch in `sys_controller.py` for the new backend, routing privileged writes through `_write_file_or_sudo`.
-4. Gate any new UI action by adding the capability key to `BUTTON_CAPABILITY` in `app.py`.
+3. Add a dispatch branch in `powertui/sys_controller.py` for the new backend, routing privileged writes through `_write_file_or_sudo`.
+4. Gate any new UI action by adding the capability key to `BUTTON_CAPABILITY` in `powertui/app.py`.
 
 ## License
 

@@ -1,21 +1,11 @@
-import sys
 import time
-
-# ---------------------------------------------------------------------------
-# Non-TUI diagnostics mode: works even without Textual installed.
-# ---------------------------------------------------------------------------
-if "--diagnostics" in sys.argv:
-    from capabilities import Capabilities
-
-    print(Capabilities().report_text())
-    sys.exit(0)
 
 from textual.app import App, ComposeResult
 from textual.containers import Container, Horizontal, Vertical
 from textual.widgets import Header, Footer, Static, Button, Log, Label
 from rich.markup import escape as _esc
-from capabilities import Capabilities
-from sys_controller import SystemController
+from .capabilities import Capabilities
+from .sys_controller import SystemController
 
 
 # Buttons gated by capability keys; a button is enabled when ANY listed key is
@@ -436,8 +426,3 @@ class PowerTUI(App):
         self.log_msg("🧹 Cleaning background container development stacks and agent daemons...")
         _, msg = self.controller.clean_background_tasks()
         self.log_msg(f"✅ {msg}")
-
-
-if __name__ == "__main__":
-    app = PowerTUI()
-    app.run()

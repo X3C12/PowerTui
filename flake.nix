@@ -11,7 +11,8 @@
     in {
       packages = forAll (system: pkgs: {
         default = pkgs.writeShellScriptBin "powertui" ''
-          exec ${pyFor pkgs}/bin/python3 ${self}/app.py "$@"
+          export PYTHONPATH="${self}:''${PYTHONPATH:-}"
+          exec ${pyFor pkgs}/bin/python3 -m powertui "$@"
         '';
       });
 
@@ -25,6 +26,9 @@
       devShells = forAll (system: pkgs: {
         default = pkgs.mkShell {
           packages = [ (pyFor pkgs) ];
+          shellHook = ''
+            export PYTHONPATH="${self}:''${PYTHONPATH:-}"
+          '';
         };
       });
     };

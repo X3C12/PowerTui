@@ -3,9 +3,9 @@ import shutil
 import tempfile
 import unittest
 
-from capabilities import Capabilities, Capability, install_hint, map_epp
-from platform_detect import DistroInfo
-from sys_controller import SystemController
+from powertui.capabilities import Capabilities, Capability, install_hint, map_epp
+from powertui.platform_detect import DistroInfo
+from powertui.sys_controller import SystemController
 
 
 def make_distro(package_manager="apt", init_system="systemd", family="debian"):

@@ -2,7 +2,7 @@ import os
 import tempfile
 import unittest
 
-import platform_detect as pd
+import powertui.platform_detect as pd
 
 
 class TestOsReleaseParsing(unittest.TestCase):

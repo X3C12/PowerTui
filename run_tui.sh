@@ -4,13 +4,15 @@ set -e
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$DIR"
+PYTHONPATH="$DIR"
+export PYTHONPATH
 
 # Diagnostics mode is read-only: no root, no third-party packages required.
 if [ "$1" = "--diagnostics" ]; then
     if [ -x "$DIR/.venv/bin/python3" ]; then
-        exec "$DIR/.venv/bin/python3" "$DIR/app.py" --diagnostics
+        exec "$DIR/.venv/bin/python3" -m powertui --diagnostics
     fi
-    exec python3 "$DIR/app.py" --diagnostics
+    exec python3 -m powertui --diagnostics
 fi
 
 distro_hint() {
@@ -71,4 +73,4 @@ fi
 echo "Starting PowerTUI via '${PRIV}' for core and GPU power management..."
 # Intentional word-splitting of $PRIV (e.g. "sudo -E").
 # shellcheck disable=SC2086
-exec $PRIV "$DIR/.venv/bin/python3" "$DIR/app.py" "$@"
+exec $PRIV "$DIR/.venv/bin/python3" -m powertui "$@"

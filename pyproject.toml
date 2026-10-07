@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "powertui"
+version = "0.1.0"
+description = "Cross-distribution terminal UI for laptop CPU, GPU and power management"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "X3C12" }]
+keywords = ["tui", "power-management", "cpu", "gpu", "battery", "linux", "textual"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: System :: Systems Administration",
+    "Topic :: Utilities",
+]
+dependencies = ["textual>=0.70.0"]
+
+[project.urls]
+Homepage = "https://github.com/X3C12/PowerTui"
+Repository = "https://github.com/X3C12/PowerTui"
+
+[project.scripts]
+powertui = "powertui.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["powertui*"]
