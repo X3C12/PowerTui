@@ -4,6 +4,8 @@ A cross-distribution terminal UI for live CPU core, Turbo/EPP, GPU, platform-pro
 
 PowerTUI detects the host distribution and probes each hardware subsystem before acting. It performs the correct backend-specific action where one exists, and grey-out + reports the reason (with a package-manager install hint) where it does not.
 
+![PowerTUI dashboard](docs/screenshot.png)
+
 ## Install
 
 One command, straight from GitHub:
