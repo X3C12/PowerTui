@@ -9,13 +9,13 @@ PowerTUI detects the host distribution and probes each hardware subsystem before
 One command, straight from GitHub:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/X3C12/powertui/main/get.sh | sh
+curl -fsSL https://raw.githubusercontent.com/X3C12/PowerTui/main/get.sh | sh
 ```
 
 or, with `wget`:
 
 ```bash
-wget -qO- https://raw.githubusercontent.com/X3C12/powertui/main/get.sh | sh
+wget -qO- https://raw.githubusercontent.com/X3C12/PowerTui/main/get.sh | sh
 ```
 
 `get.sh` downloads the source into `$HOME/.local/share/powertui` (override with `--dir <path>`), installs the `powertui` command and desktop entry, and can fetch a specific branch or tag with `--ref <ref>` (default `main`). Add `--system` for a system-wide install and `--verify` to verify the download before installing.
@@ -23,7 +23,7 @@ wget -qO- https://raw.githubusercontent.com/X3C12/powertui/main/get.sh | sh
 ### Install from a local clone
 
 ```bash
-git clone https://github.com/X3C12/powertui.git
+git clone https://github.com/X3C12/PowerTui.git
 cd powertui
 sh install.sh
 ```

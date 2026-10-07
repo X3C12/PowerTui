@@ -2,14 +2,14 @@
 # ---------------------------------------------------------------------------
 # PowerTUI bootstrap installer.
 #
-# Owner/repo is X3C12/powertui (override with POWERTUI_REPO if you fork it).
+# Owner/repo is X3C12/PowerTui (override with POWERTUI_REPO if you fork it).
 #
-# Safe to run as:  curl -fsSL https://raw.githubusercontent.com/X3C12/powertui/main/get.sh | sh
+# Safe to run as:  curl -fsSL https://raw.githubusercontent.com/X3C12/PowerTui/main/get.sh | sh
 # Must NOT rely on $0 or its own path.
 # ---------------------------------------------------------------------------
 set -e
 
-REPO="${POWERTUI_REPO:-X3C12/powertui}"
+REPO="${POWERTUI_REPO:-X3C12/PowerTui}"
 REF="main"
 DIR="${XDG_DATA_HOME:-$HOME/.local/share}/powertui"
 DIR_GIVEN=0
