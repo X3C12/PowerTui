@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-10-08
+
+### Added
+
+- Portable **AppImage** (`PowerTUI-x86_64.AppImage`) built with `python-appimage`,
+  bundling a relocatable CPython 3.13 + Textual; run it directly, no install and no
+  dependencies. Built and attached to GitHub Releases by CI
+  (`.github/workflows/release.yml`).
+- `packaging/build_appimage.sh` for reproducing the AppImage locally.
+- Automatic GitHub **Release** on `v*` tags (`powertui.tar.gz` + `SHA256SUMS`).
+- README badges (CI, release, license, Python) and community health files
+  (`CONTRIBUTING.md`, `SECURITY.md`, issue forms, PR template).
+- `docs/PROMOTION.md` promotion kit.
+
+### Changed
+
+- Packaged as the installable `powertui` module (`pip`/`pipx`) with a `powertui`
+  console entry point; `python -m powertui` runs the app.
+
 ## [0.1.0] - 2026-10-07
 
 ### Added
@@ -40,5 +59,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CI workflow: tests on Python 3.10–3.13, `shellcheck` on the shell scripts,
   and `.desktop` validation.
 
-[Unreleased]: https://github.com/X3C12/PowerTui/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/X3C12/PowerTui/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/X3C12/PowerTui/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/X3C12/PowerTui/releases/tag/v0.1.0

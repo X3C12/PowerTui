@@ -1,10 +1,14 @@
 # Python
 __pycache__/
 *.py[cod]
-*.egg-info/
-.eggs/
+
+# Build artifacts
 build/
 dist/
+packaging/dist/
+*.AppImage
+*.egg-info/
+.eggs/
 
 # Virtual environments
 .venv/

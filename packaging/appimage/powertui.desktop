@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=PowerTUI
+Comment=Terminal UI for laptop CPU, GPU and power management
+Exec=powertui
+Terminal=true
+Categories=System;Monitor;
+Icon=powertui
+Keywords=power;battery;cpu;gpu;tui;terminal;monitor;

@@ -43,6 +43,18 @@ pip install .                                            # or into a virtualenv
 
 This provides the `powertui` command (`powertui --diagnostics` for the report). It does not create a desktop entry — use `install.sh` for that.
 
+### Portable AppImage (no install)
+
+Download `PowerTUI-x86_64.AppImage` from the [latest release](https://github.com/X3C12/PowerTui/releases/latest), then run it — it bundles Python and Textual, so there is nothing to install:
+
+```bash
+chmod +x PowerTUI-x86_64.AppImage
+./PowerTUI-x86_64.AppImage          # launch the TUI (uses sudo/doas/pkexec for changes)
+./PowerTUI-x86_64.AppImage --diagnostics   # read-only, no root
+```
+
+On a filesystem without FUSE, prefix with `APPIMAGE_EXTRACT_AND_RUN=1`. The AppImage embeds a desktop entry (`Terminal=true`), so desktop menus can integrate it too.
+
 ### Install from a local clone
 
 ```bash

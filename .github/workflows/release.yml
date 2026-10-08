@@ -14,16 +14,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Build PowerTUI-x86_64.AppImage
+        env:
+          # appimagetool is itself an AppImage; extract-and-run avoids FUSE2 issues on CI runners.
+          APPIMAGE_EXTRACT_AND_RUN: "1"
+        run: |
+          sh packaging/build_appimage.sh
+          cp packaging/dist/PowerTUI-x86_64.AppImage .
       - name: Build powertui.tar.gz + SHA256SUMS
         run: |
           VERSION="${GITHUB_REF_NAME#v}"
           git archive --format=tar.gz --prefix="powertui-$VERSION/" -o powertui.tar.gz HEAD
-          sha256sum powertui.tar.gz > SHA256SUMS
+          sha256sum powertui.tar.gz PowerTUI-x86_64.AppImage > SHA256SUMS
           cat SHA256SUMS
       - name: Publish release
         uses: softprops/action-gh-release@v2
         with:
           files: |
             powertui.tar.gz
+            PowerTUI-x86_64.AppImage
             SHA256SUMS
           generate_release_notes: true
