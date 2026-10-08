@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-10-08
+
+### Changed
+
+- Repository layout: the `run_tui.sh`, `install.sh`, `uninstall.sh` and `get.sh`
+  scripts moved to `scripts/`, and the `test_*.py` files moved to `tests/`. The
+  GitHub install URL is now
+  `https://raw.githubusercontent.com/X3C12/PowerTui/main/scripts/get.sh`.
+- Removed the internal promotion kit and the redundant `docs/screenshot.svg` from the
+  public repository.
+
 ## [0.1.1] - 2026-10-08
 
 ### Added
@@ -19,7 +30,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Automatic GitHub **Release** on `v*` tags (`powertui.tar.gz` + `SHA256SUMS`).
 - README badges (CI, release, license, Python) and community health files
   (`CONTRIBUTING.md`, `SECURITY.md`, issue forms, PR template).
-- `docs/PROMOTION.md` promotion kit.
 
 ### Changed
 
@@ -59,6 +69,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CI workflow: tests on Python 3.10–3.13, `shellcheck` on the shell scripts,
   and `.desktop` validation.
 
-[Unreleased]: https://github.com/X3C12/PowerTui/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/X3C12/PowerTui/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/X3C12/PowerTui/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/X3C12/PowerTui/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/X3C12/PowerTui/releases/tag/v0.1.0

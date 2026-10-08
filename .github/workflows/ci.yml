@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: pip install -e .
       - name: Run tests (hermetic, no root)
-        run: python -m unittest discover -p "test_*.py" -v
+        run: python -m unittest discover -s tests -p "test_*.py" -v
       - name: Diagnostics smoke
         run: python -m powertui --diagnostics
 
@@ -36,18 +36,18 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y -qq shellcheck desktop-file-utils
       - name: shellcheck (POSIX sh)
-        run: shellcheck -s sh run_tui.sh install.sh uninstall.sh get.sh
+        run: shellcheck -s sh scripts/run_tui.sh scripts/install.sh scripts/uninstall.sh scripts/get.sh
       - name: Install into a temp HOME and validate the desktop entry
         run: |
           export HOME="$RUNNER_TEMP/fakehome"
           mkdir -p "$HOME"
-          sh install.sh
+          sh scripts/install.sh
           test -x "$HOME/.local/bin/powertui"
           test -f "$HOME/.local/share/applications/powertui.desktop"
           desktop-file-validate "$HOME/.local/share/applications/powertui.desktop"
       - name: Uninstall is clean and idempotent
         run: |
           export HOME="$RUNNER_TEMP/fakehome"
-          sh uninstall.sh
-          sh uninstall.sh
+          sh scripts/uninstall.sh
+          sh scripts/uninstall.sh
           test ! -e "$HOME/.local/bin/powertui"

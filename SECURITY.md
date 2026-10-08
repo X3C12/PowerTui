@@ -7,7 +7,8 @@ tools to change CPU, GPU, fan and power state). Security-relevant issues include
 but are not limited to:
 
 - Command injection or unsafe argument handling in `powertui/sys_controller.py`
-  or the POSIX shell installers (`run_tui.sh`, `install.sh`, `uninstall.sh`, `get.sh`).
+  or the POSIX shell installers (`scripts/run_tui.sh`, `scripts/install.sh`,
+  `scripts/uninstall.sh`, `scripts/get.sh`).
 - Path handling or privilege-escalation problems in `_write_file_or_sudo`.
 - Any way untrusted input (e.g. tool output or `/etc/os-release`) could influence
   a command or a written sysfs value.

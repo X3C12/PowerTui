@@ -3,14 +3,15 @@
 set -e
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
-cd "$DIR"
-PYTHONPATH="$DIR"
+ROOT="$(cd "$DIR/.." && pwd)"
+cd "$ROOT"
+PYTHONPATH="$ROOT"
 export PYTHONPATH
 
 # Diagnostics mode is read-only: no root, no third-party packages required.
 if [ "$1" = "--diagnostics" ]; then
-    if [ -x "$DIR/.venv/bin/python3" ]; then
-        exec "$DIR/.venv/bin/python3" -m powertui --diagnostics
+    if [ -x "$ROOT/.venv/bin/python3" ]; then
+        exec "$ROOT/.venv/bin/python3" -m powertui --diagnostics
     fi
     exec python3 -m powertui --diagnostics
 fi
@@ -38,9 +39,9 @@ distro_hint() {
 }
 
 # Ensure a virtual environment exists.
-if [ ! -x "$DIR/.venv/bin/python3" ]; then
+if [ ! -x "$ROOT/.venv/bin/python3" ]; then
     echo "Creating python virtual environment..."
-    if ! python3 -m venv "$DIR/.venv" 2>/dev/null; then
+    if ! python3 -m venv "$ROOT/.venv" 2>/dev/null; then
         echo "ERROR: could not create a virtual environment (python3 venv/pip unavailable)." >&2
         distro_hint
         exit 1
@@ -48,9 +49,9 @@ if [ ! -x "$DIR/.venv/bin/python3" ]; then
 fi
 
 # Install dependencies only when actually missing (offline / air-gapped safe).
-if ! "$DIR/.venv/bin/python3" -c "import textual" >/dev/null 2>&1; then
+if ! "$ROOT/.venv/bin/python3" -c "import textual" >/dev/null 2>&1; then
     echo "Installing dependencies..."
-    if ! "$DIR/.venv/bin/python3" -m pip install -q -r "$DIR/requirements.txt"; then
+    if ! "$ROOT/.venv/bin/python3" -m pip install -q -r "$ROOT/requirements.txt"; then
         echo "ERROR: failed to install dependencies (pip unavailable or no network)." >&2
         distro_hint
         exit 1
@@ -73,4 +74,4 @@ fi
 echo "Starting PowerTUI via '${PRIV}' for core and GPU power management..."
 # Intentional word-splitting of $PRIV (e.g. "sudo -E").
 # shellcheck disable=SC2086
-exec $PRIV "$DIR/.venv/bin/python3" -m powertui "$@"
+exec $PRIV "$ROOT/.venv/bin/python3" -m powertui "$@"

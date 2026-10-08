@@ -20,16 +20,16 @@ PowerTUI detects the host distribution and probes each hardware subsystem before
 One command, straight from GitHub:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/X3C12/PowerTui/main/get.sh | sh
+curl -fsSL https://raw.githubusercontent.com/X3C12/PowerTui/main/scripts/get.sh | sh
 ```
 
 or, with `wget`:
 
 ```bash
-wget -qO- https://raw.githubusercontent.com/X3C12/PowerTui/main/get.sh | sh
+wget -qO- https://raw.githubusercontent.com/X3C12/PowerTui/main/scripts/get.sh | sh
 ```
 
-`get.sh` downloads the source into `$HOME/.local/share/powertui` (override with `--dir <path>`), installs the `powertui` command and desktop entry, and can fetch a specific branch or tag with `--ref <ref>` (default `main`). Add `--system` for a system-wide install and `--verify` to verify the download before installing.
+`scripts/get.sh` downloads the source into `$HOME/.local/share/powertui` (override with `--dir <path>`), installs the `powertui` command and desktop entry, and can fetch a specific branch or tag with `--ref <ref>` (default `main`). Add `--system` for a system-wide install and `--verify` to verify the download before installing.
 
 ### Install with pip / pipx
 
@@ -41,7 +41,7 @@ pip install .                                            # or into a virtualenv
 # pipx install powertui                                  # once it is on PyPI
 ```
 
-This provides the `powertui` command (`powertui --diagnostics` for the report). It does not create a desktop entry — use `install.sh` for that.
+This provides the `powertui` command (`powertui --diagnostics` for the report). It does not create a desktop entry — use `scripts/install.sh` for that.
 
 ### Portable AppImage (no install)
 
@@ -60,10 +60,10 @@ On a filesystem without FUSE, prefix with `APPIMAGE_EXTRACT_AND_RUN=1`. The AppI
 ```bash
 git clone https://github.com/X3C12/PowerTui.git
 cd powertui
-sh install.sh
+sh scripts/install.sh
 ```
 
-`install.sh` is a POSIX `sh` script (busybox-ash compatible — no bash needed, so it runs on Alpine and Void). It installs to your user scope by default:
+`scripts/install.sh` is a POSIX `sh` script (busybox-ash compatible — no bash needed, so it runs on Alpine and Void). It installs to your user scope by default:
 
 | Flag | Effect |
 |---|---|
@@ -159,7 +159,7 @@ On first launch the launcher creates `.venv` and installs `textual` only if it i
 From a local clone without installing, the launcher can be run directly:
 
 ```bash
-./run_tui.sh
+scripts/run_tui.sh
 ```
 
 ### Diagnostics
@@ -169,7 +169,7 @@ From a local clone without installing, the launcher can be run directly:
 ```bash
 powertui --diagnostics
 # or from a local clone
-./run_tui.sh --diagnostics
+scripts/run_tui.sh --diagnostics
 python3 -m powertui --diagnostics
 ```
 
@@ -205,14 +205,14 @@ Capabilities:
 Remove the `powertui` command, desktop entry and icon:
 
 ```bash
-sh uninstall.sh
+sh scripts/uninstall.sh
 ```
 
 | Flag | Effect |
 |---|---|
 | `--system` | Remove the system-wide install under `/usr/local`. |
 | `--dir <path>` | Source tree to purge (only used with `--purge`); default `~/.local/share/powertui`. |
-| `--purge` | Also delete the source tree (for a `get.sh` install this removes the virtual environment too). |
+| `--purge` | Also delete the source tree (for a `scripts/get.sh` install this removes the virtual environment too). |
 
 ## Controls
 
@@ -250,7 +250,7 @@ PowerTUI flows detection -> capability -> dispatch -> TUI:
 49 hermetic `unittest` tests run against temporary-directory mocks — they never touch the real `/proc`, `/sys` or `nvidia-smi`, and need no root:
 
 ```bash
-python3 -m unittest discover -p "test_*.py"
+python3 -m unittest discover -s tests -p "test_*.py"
 ```
 
 - `test_topology.py` — CPU discovery/classification, single-thread high-frequency P-core heuristic, topology caching.

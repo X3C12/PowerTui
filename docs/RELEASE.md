@@ -1,6 +1,6 @@
 # Release checklist
 
-`get.sh` prefers a GitHub **release asset** named `powertui.tar.gz` and verifies it
+`scripts/get.sh` prefers a GitHub **release asset** named `powertui.tar.gz` and verifies it
 against `SHA256SUMS` when `--verify` is used. If no release exists it falls back to
 the `main` branch archive, so releases are optional — but they enable version pinning
 and checksum verification.
@@ -39,7 +39,7 @@ Run from the repository root, on the commit you want to release.
 5. Smoke-test the published installer:
 
    ```sh
-   curl -fsSL https://raw.githubusercontent.com/X3C12/PowerTui/main/get.sh | sh -s -- --verify
+   curl -fsSL https://raw.githubusercontent.com/X3C12/PowerTui/main/scripts/get.sh | sh -s -- --verify
    powertui --diagnostics
    ```
 
@@ -49,7 +49,7 @@ Run from the repository root, on the commit you want to release.
 ## Notes
 
 - `pyproject.toml` version and the git tag must match.
-- Keep the tarball prefix (`powertui-$VERSION/`) so `get.sh` finds a single top-level dir.
+- Keep the tarball prefix (`powertui-$VERSION/`) so `scripts/get.sh` finds a single top-level dir.
 - `SHA256SUMS` must contain a line whose second field ends in `powertui.tar.gz`.
 - Publishing to PyPI (once ready) is a separate step: `python -m build` then
   `twine upload dist/*`.

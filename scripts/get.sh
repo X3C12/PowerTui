@@ -4,7 +4,7 @@
 #
 # Owner/repo is X3C12/PowerTui (override with POWERTUI_REPO if you fork it).
 #
-# Safe to run as:  curl -fsSL https://raw.githubusercontent.com/X3C12/PowerTui/main/get.sh | sh
+# Safe to run as:  curl -fsSL https://raw.githubusercontent.com/X3C12/PowerTui/main/scripts/get.sh | sh
 # Must NOT rely on $0 or its own path.
 # ---------------------------------------------------------------------------
 set -e
@@ -133,4 +133,4 @@ set --
 
 echo "Running installer from $DIR ..."
 # Not exec'd: the EXIT trap above must run to remove $TMP.
-sh "$DIR/install.sh" "$@"
+sh "$DIR/scripts/install.sh" "$@"

@@ -30,7 +30,8 @@ while [ $# -gt 0 ]; do
     shift
 done
 
-REPO="$(cd "$(dirname "$0")" && pwd)"
+DIR="$(cd "$(dirname "$0")" && pwd)"
+ROOT="$(cd "$DIR/.." && pwd)"
 
 if [ "$SYSTEM" = "1" ]; then
     [ -n "$DEST" ] || DEST="/usr/local/share/powertui"
@@ -50,7 +51,7 @@ fi
 WRAPPER="$BIN_DIR/powertui"
 DESKTOP="$APPS_DIR/powertui.desktop"
 ICON="$ICON_DIR/powertui.svg"
-RUN_TUI="$REPO/run_tui.sh"
+RUN_TUI="$ROOT/scripts/run_tui.sh"
 
 # Run a command with escalate-if-needed for system installs.
 priv() {
@@ -86,7 +87,7 @@ Type=Application
 Name=PowerTUI
 Comment=Cross-distribution hardware power control
 Exec="$WRAPPER"
-Path=$REPO
+Path=$ROOT
 TryExec=$WRAPPER
 Terminal=true
 Icon=powertui
@@ -94,7 +95,7 @@ Categories=System;Monitor;
 Keywords=power;battery;cpu;gpu;fan;turbo;
 StartupNotify=true
 EOF
-    priv cp "$REPO/assets/powertui.svg" "$ICON"
+    priv cp "$ROOT/assets/powertui.svg" "$ICON"
     priv chmod 0644 "$DESKTOP" "$ICON"
 fi
 

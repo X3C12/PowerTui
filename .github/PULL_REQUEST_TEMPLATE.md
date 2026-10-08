@@ -15,7 +15,7 @@
 
 ## Checklist
 
-- [ ] `python3 -m unittest discover -p "test_*.py"` passes
-- [ ] `shellcheck -s sh run_tui.sh install.sh uninstall.sh get.sh` passes (if scripts changed)
+- [ ] `python3 -m unittest discover -s tests -p "test_*.py"` passes
+- [ ] `shellcheck -s sh scripts/run_tui.sh scripts/install.sh scripts/uninstall.sh scripts/get.sh` passes (if scripts changed)
 - [ ] `CHANGELOG.md` updated under `[Unreleased]`
 - [ ] No behavior change beyond the stated scope

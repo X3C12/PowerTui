@@ -20,7 +20,7 @@ To run the TUI against real hardware you need elevated access; use the launcher
 (which picks `sudo`/`doas`/`pkexec`):
 
 ```sh
-./run_tui.sh
+scripts/run_tui.sh
 ```
 
 ## Tests
@@ -29,13 +29,13 @@ All tests are hermetic (they mock `/proc`, `/sys` and PCI trees in temp dirs and
 never require root). Run them before opening a PR:
 
 ```sh
-python3 -m unittest discover -p "test_*.py"
+python3 -m unittest discover -s tests -p "test_*.py"
 ```
 
 If you change a shell script, also run:
 
 ```sh
-shellcheck -s sh run_tui.sh install.sh uninstall.sh get.sh
+shellcheck -s sh scripts/run_tui.sh scripts/install.sh scripts/uninstall.sh scripts/get.sh
 ```
 
 ## Adding a backend or distribution
