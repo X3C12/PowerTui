@@ -1,0 +1,44 @@
+name: Bug report
+description: Something is wrong with PowerTUI (crash, no-op, wrong hardware state)
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. Run `powertui --diagnostics` (no root needed) and paste the output — it shows exactly which backends were detected.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What did you expect, and what actually happened?
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics output
+      description: Output of `powertui --diagnostics`
+      render: text
+    validations:
+      required: true
+  - type: input
+    id: distro
+    attributes:
+      label: Distribution and kernel
+      placeholder: "e.g. Kali 2026.3, kernel 7.1.5"
+    validations:
+      required: true
+  - type: input
+    id: hardware
+    attributes:
+      label: CPU and GPU
+      placeholder: "e.g. Intel Core i7-13700H (P/E cores) + NVIDIA RTX 5060"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: "1. Launch powertui\n2. Click ...\n3. See error"
+    validations:
+      required: false

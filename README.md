@@ -1,5 +1,10 @@
 # PowerTUI
 
+[![CI](https://github.com/X3C12/PowerTui/actions/workflows/ci.yml/badge.svg)](https://github.com/X3C12/PowerTui/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/X3C12/PowerTui?include_prereleases&sort=semver)](https://github.com/X3C12/PowerTui/releases)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](pyproject.toml)
+
 A cross-distribution terminal UI for live CPU core, Turbo/EPP, GPU, platform-profile, fan and battery control on Linux.
 
 PowerTUI detects the host distribution and probes each hardware subsystem before acting. It performs the correct backend-specific action where one exists, and grey-out + reports the reason (with a package-manager install hint) where it does not.

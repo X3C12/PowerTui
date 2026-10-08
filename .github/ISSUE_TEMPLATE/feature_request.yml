@@ -1,0 +1,25 @@
+name: Feature request
+description: Suggest a new backend, distribution, control, or improvement
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or use case
+      description: What are you trying to do that PowerTUI does not support today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Which tool, sysfs interface, or distro would this involve?
+    validations:
+      required: false
+  - type: input
+    id: hardware
+    attributes:
+      label: Hardware / distribution
+      placeholder: "e.g. ASUS laptop, AMD Ryzen 7040, Arch"
+    validations:
+      required: false

@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Question / usage help
+    url: https://github.com/X3C12/PowerTui/discussions
+    about: Ask questions and share setups in GitHub Discussions (if enabled).
